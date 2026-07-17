@@ -4,9 +4,18 @@ Patched [QualityPlus OneShoot](https://qualityplus.gitbook.io/) plugin for the G
 
 ## Changes
 
-1. **Rename** – Plugin id `OneShot`, command `/oneshot` (aliases: `oneshoot`, `os`). Data folder `plugins/OneShot/`.
+1. **Rename** – Plugin id `OneShot`, command `/oneshot` (alias: `os`). Data folder `plugins/OneShot/`.
 2. **Paper 26.1.2+** – `api-version: 1.21`; works with Club’s Paper `26.1.2` (TheAssistant already maps `V26_R1`).
 3. **Display entities** – TheAssistant’s `TheHologram` now spawns `TextDisplay` entities instead of ArmorStands. `ArmorStandUtil` creates `ItemDisplay` entities.
+4. **Min players** – `min-players: 2` in `config.yml` (match starts when that many players have joined).
+
+## How to play
+
+```
+/oneshot join
+```
+
+Needs an **enabled** arena with spawn points set (`/oneshot arenaenable <arena>`, etc.). Leave with `/oneshot leave`. Invite flow: `/oneshot invite <player>` → `/oneshot accept <player>`.
 
 ## Requirements
 

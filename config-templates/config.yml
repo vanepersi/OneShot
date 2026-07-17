@@ -312,6 +312,8 @@ main-spawn:
 invite-duration:
   amount: 30
   type: SECONDS
+# Minimum players required before countdown starts
+min-players: 2
 game-item-config:
   bow-item:
     material: BOW

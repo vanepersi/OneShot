@@ -37,6 +37,13 @@ javac --release 21 -cp "$CP" -d "$ROOT/build/classes" \
   "$ROOT/patches/com/qualityplus/assistant/hologram/TheHologram.java" \
   "$ROOT/patches/com/qualityplus/assistant/util/armorstand/ArmorStandUtil.java"
 
+echo "Compiling OneShot patches..."
+ONESHOT_CP="$CP:$ONESHOT_SRC"
+javac --release 21 -cp "$ONESHOT_CP" -d "$ROOT/build/classes" \
+  "$ROOT/patches/com/qualityplus/oneshoot/base/config/Config.java" \
+  "$ROOT/patches/com/qualityplus/oneshoot/base/config/Commands.java" \
+  "$ROOT/patches/com/qualityplus/oneshoot/base/service/OneShootServiceImpl.java"
+
 # ---- Patch TheAssistant jar ----
 WORKDIR="$ROOT/build/assistant-work"
 mkdir -p "$WORKDIR"
@@ -79,18 +86,26 @@ if [[ -d "$WORKDIR/com/qualityplus/assistant/util/armorstand" ]]; then
     "$WORKDIR/com/qualityplus/assistant/util/armorstand/"
 fi
 
+# Overlay OneShot service/config patches
+cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/config/Config*.class \
+  "$WORKDIR/com/qualityplus/oneshoot/base/config/"
+cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/config/Commands*.class \
+  "$WORKDIR/com/qualityplus/oneshoot/base/config/"
+cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/service/OneShootServiceImpl*.class \
+  "$WORKDIR/com/qualityplus/oneshoot/base/service/"
+
 cat > "$WORKDIR/plugin.yml" <<'EOF'
 name: OneShot
 description: OneShot — one-arrow duel minigame (Genesiverse)
 main: com.qualityplus.oneshoot.OneShoot
-version: 1.0.1
+version: 1.0.2
 api-version: '1.21'
 authors: [QualityPlus, Genesi]
 load: POSTWORLD
 depend: [TheAssistant]
 commands:
   oneshot:
-    aliases: [oneshoot, os]
+    aliases: [os]
     description: OneShot's main command
     usage: /oneshot
 EOF
