@@ -1,0 +1,193 @@
+# ================================
+#        Commands      
+# ================================
+reload-command:
+  aliases:
+  - reload
+  description: Reload files
+  permission: oneshoot.reload
+  syntax: /OneShot reload
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+arena-create-command:
+  aliases:
+  - arenacreate
+  description: Creates a new arena
+  permission: oneshoot.arena.arenacreate
+  syntax: /OneShot arenacreate <arena>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+arena-delete-command:
+  aliases:
+  - arenadelete
+  description: Deletes an arena
+  permission: oneshoot.arena.arenadelete
+  syntax: /OneShot arenadelete <arena>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+arena-add-player-spawn:
+  aliases:
+  - arenaddplayerspawn
+  description: 'Add spawn for arena '
+  permission: oneshoot.arena.arenaddplayerspawn
+  syntax: /OneShot arenaddplayerspawn <arena>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+arena-set-wait-spawn:
+  aliases:
+  - arenasetwaitspawn
+  description: 'Set wait spawn for arena '
+  permission: oneshoot.arena.arenasetwaitspawn
+  syntax: /OneShot arenasetwaitspawn <arena>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+arena-list-command:
+  aliases:
+  - arenalist
+  description: List all arenas
+  permission: oneshoot.arena.arenalist
+  syntax: /OneShot arenalist
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+arena-set-display-name:
+  aliases:
+  - arenasetdisplayname
+  description: Set arena displayname
+  permission: oneshoot.arena.arenasetdisplayname
+  syntax: /OneShot arenasetdisplayname <arena> <displayname>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+arena-enable-command:
+  aliases:
+  - arenaenable
+  description: Enable arena
+  permission: oneshoot.arena.arenaenable
+  syntax: /OneShot arenaenable <arena>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+arena-disable-command:
+  aliases:
+  - arenadisable
+  description: Disable arena
+  permission: oneshoot.arena.arenadisable
+  syntax: /OneShot arenadisable <arena>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+arena-set-center-command:
+  aliases:
+  - arenasetcenter
+  description: 'Set center for arena '
+  permission: oneshoot.arena.arenasetcenter
+  syntax: /OneShot arenasetcenter <arena>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+set-main-spawn-command:
+  aliases:
+  - setmainspawn
+  description: 'Set main spawn '
+  permission: oneshoot.arena.arenasetcenter
+  syntax: /OneShot setmainspawn
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+arena-set-min-players:
+  aliases:
+  - arenasetminplayers
+  description: Set arena min players
+  permission: oneshoot.arena.arenasetminplayers
+  syntax: /OneShot arenasetminplayers <arena> <minplayers>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+arena-set-max-players:
+  aliases:
+  - arenasetmaxplayers
+  description: Set arena max players
+  permission: oneshoot.arena.arenasetmaxplayers
+  syntax: /OneShot arenasetmaxplayers <arena> <maxplayers>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+join-command:
+  aliases:
+  - join
+  description: Join arena
+  permission: oneshoot.join
+  syntax: /OneShot join
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+leave-command:
+  aliases:
+  - leave
+  description: Leave arena
+  permission: oneshoot.leave
+  syntax: /OneShot leave
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+invite-command:
+  aliases:
+  - invite
+  description: Invite player to game
+  permission: oneshoot.invite
+  syntax: /OneShot invite <player>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+accept-command:
+  aliases:
+  - accept
+  description: Accept player invite
+  permission: oneshoot.accept
+  syntax: /OneShot accept <player>
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+test-give-command:
+  aliases:
+  - test
+  description: 'Set main spawn '
+  permission: oneshoot.arena.test
+  syntax: /OneShot test
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot
+help-command:
+  aliases:
+  - help
+  description: Show all commands
+  permission: oneshoot.help
+  syntax: /OneShot help
+  onlyForPlayers: true
+  cooldownInSeconds: 0
+  enabled: true
+  labelProvider: oneshot

@@ -1,0 +1,96 @@
+# ================================
+#        Language      
+# ================================
+plugin-messages:
+  successfully-reloaded: '&aPlugin has been reloaded successfully!'
+  invalid-player: '&cInvalid Player!'
+  use-syntax: '&cUsage: %usage%!'
+  no-permission: '&eYou don''t have permission to do that!'
+  unknown-command: '&cUnknown command!'
+  must-be-aplayer: '&cYou must be a player to do that!'
+  invalid-arguments: '&cInvalid Arguments!'
+  invalid-amount: '&cInvalid Amount!'
+  use-help: '&cUse: /oneshot help'
+  help-message: '&7%command% - &e%description%'
+  help-header: '      &6&lOneShot   '
+  helpfooter: '&e<< &6Page %page% of %maxpage% &e>>'
+  previous-page: '<<'
+  next-page: '>>'
+  help-page-hover-message: Click to go to page %page%
+title-messages:
+  your-turn-title:
+    title: '&dYour turn'
+    subtitle: '&fDon''t miss!'
+    fadeIn: 5
+    stay: 5
+    fadeOut: 5
+  you-missed:
+    title: '&cYou missed!'
+    subtitle: '&f'
+    fadeIn: 5
+    stay: 5
+    fadeOut: 5
+arena-messages:
+  arena-already-exists: '&e[OneShot] &cAn arena with that name already exists!'
+  arena-created-successfully: '&e[OneShot] &aSuccessfully created arena %arena%!'
+  arena-max-spawn-reach: '&e[OneShot] &cMax spawn size reached!'
+  arena-doesnt-exists: '&e[OneShot] &cAn arena with that doesn''t exists!'
+  arena-deleted-successfully: '&e[OneShot] &aSuccessfully removed arena %arena%!'
+  successfully-added-spawn: '&e[OneShot] &aSuccessfully added spawn for arena %arena%
+    at %location%!'
+  success-set-wait-spawn: '&e[OneShot] &aSuccessfully set wait spawn for arena %arena%
+    at %location%!'
+  success-set-main-spawn: '&e[OneShot] &aSuccessfully set main game spawn at %location%!'
+  successfully-set-display-name: '&e[OneShot] &aSuccessfully set displayname for
+    %arena% to %displayname%!'
+  successfully-enabled-arena: '&e[OneShot] &aSuccessfully enabled arena %arena%!'
+  successfully-disabled-arena: '&e[OneShot] &aSuccessfully disabled arena %arena%!'
+game-messages:
+  player-accepted-but-no-arenas: '&c%player% accepted match but there are no available
+    arenas!'
+  no-arenas-available: '&cNo arenas available!'
+  internal-error: '&cInternal error!'
+  you-need-to-be-in-game: '&cYou are not in game!'
+  successfully-left-game: '&aSuccessfully left arena!'
+  player-joined-game: '&a%player% joined the game (%current_players%/%max_players%)'
+  player-left-game: '&c%player% left the game (%current_players%/%max_players%)'
+  player-left-game-while-playing: '&c%player% left the game'
+  player-skipped: '&c%player% skipped turn'
+  game-starting-in: '&aGame will start in %time% seconds!'
+  game-started: '&aGame Started!'
+  its-not-your-turn: '&cIt''s not your turn!'
+  already-in-game: '&cYou are in a game!'
+  game-finished: '&aGame finished! %player% won the match'
+  invitation-sent: '&aInvite sent to &2%player%'
+  invite-accepted: '&aInvite accepted to &2%player%'
+  invite-accepted-from: '&aInvite accepted from &2%player%'
+  invite-already-received: '&cYou already have an invite pending for player &2%player%'
+  invite-already-sent: '&cYou already sent an invite to player &2%player%'
+  invite-not-received: '&cYou doesn''t have an invite pending from &2%player%'
+  received-invite-to-fight: '&aYou received an invite from &2%player%'
+  accept-message:
+    message:
+    - '   &a&l[ACCEPT]'
+    action: /oneshot accept %player%
+    aboveMessage: '&eClick to accept fight!'
+score-board-messages:
+  time-format: '%minutes_placeholder%:%seconds_placeholder%'
+  days: '%days%d'
+  hours: '%hours%h'
+  minutes: '%minutes%m'
+  seconds: '%seconds%s'
+  no-time-format: '&b-'
+  show-no-time-symbol: true
+  score-board-title: '&d&l  Genesiverse One Shot'
+  scoreboard:
+    11: '&d--------------------'
+    10: '&d   '
+    9: '&d&lCurrent Turn'
+    8: '&7  %game_turn_player%'
+    7: '&f  %game_turn_remaining_time%'
+    6: '&d'
+    5: '&d&lGame Time Remaining'
+    4: '&f  %game_remaining_time%'
+    3: '&d   '
+    2: '&d--------------------'
+    1: '      &dThanks for playing Genesi'

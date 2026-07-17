@@ -1,0 +1,23 @@
+# ================================
+#        Main Arena      
+# ================================
+arena:
+  id: test
+  arenaSettings:
+    displayName: ''
+    enabled: false
+    countdownSeconds: 5
+    playerSpawnPoints: []
+    waitSpawn:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      pitch: 0.0
+      yaw: 0.0
+      world: world
+    turnTime:
+      amount: 30
+      type: SECONDS
+    gameTime:
+      amount: 10
+      type: MINUTES

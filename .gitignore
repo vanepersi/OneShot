@@ -1,0 +1,25 @@
+# Build
+build/
+dist/*.jar
+lib/*.jar
+lib/joml.jar
+
+# Keep originals out of git if large — use Git LFS or local only
+# We commit scripts/patches/configs; jars are rebuilt locally
+
+# OS
+.DS_Store
+*.class
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Local originals / build artifacts
+lib/
+dist/
+*.jar
+!patches/**/*.jar
+config-templates/storage/

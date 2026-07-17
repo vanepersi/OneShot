@@ -1,0 +1,347 @@
+#   _   _  _   _   ____  
+#  | | | || \ | | |  _ \ 
+#  | | | ||  \| | | | | |
+#  | |_| || |\  | | |_| |
+
+#   \___/ |_| \_| |____/ 
+#  
+#       /\_/\  
+#      ( o.o ) 
+#       > ^ < 
+#  
+#  OneShot Game Configuration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Database Configuration
+# Allowed Database Types
+# - H2
+# - FLAT
+# - MYSQL
+# - REDIS
+database-credentials:
+  host: localhost
+  database: database_name
+  userName: root
+  passWord: '123456'
+  port: 8080
+  useSsl: false
+  type: H2
+message-system: iToast
+lobby-item-config:
+  leave-item:
+    material: null
+    custom-model-data: 0
+    amount: 0
+    display-name: null
+    slot: 0
+    enabled: false
+main-spawn:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  pitch: 0.0
+  yaw: 0.0
+  world: world
+invite-duration:
+  amount: 30
+  type: SECONDS
+game-item-config:
+  bow-item:
+    material: BOW
+    amount: 1
+    displayName: '&9&lOneShot Bow'
+    headData: null
+    headOwner: null
+    headOwnerUUID: null
+    lore:
+    - '&9&lEPIC'
+    slot: null
+    enabled: true
+    command: null
+    enchanted: true
+    customModelData: null
+  arrow-item:
+    material: ARROW
+    amount: 1
+    displayName: '&9&lOneShot Arrow'
+    headData: null
+    headOwner: null
+    headOwnerUUID: null
+    lore:
+    - '&9&lEPIC'
+    slot: null
+    enabled: true
+    command: null
+    enchanted: true
+    customModelData: null
+game-end-config:
+  fireWorksPer5Ticks: 2
+  fireworksEnabled: true
+  particlesEnabled: true
