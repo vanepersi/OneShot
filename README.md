@@ -4,10 +4,11 @@ Patched [QualityPlus OneShoot](https://qualityplus.gitbook.io/) plugin for the G
 
 ## Changes
 
-1. **Rename** – Plugin id `OneShot`, command `/oneshot` (alias: `os`). Data folder `plugins/OneShot/`.
+1. **Rename** – Plugin id `OneShot`, command `/oneshot` (alias: `os`). Data folder `plugins/GenesiCore/games/OneShot/`.
 2. **Paper 26.1.2+** – `api-version: 1.21`; works with Club’s Paper `26.1.2` (TheAssistant already maps `V26_R1`).
 3. **Display entities** – TheAssistant’s `TheHologram` now spawns `TextDisplay` entities instead of ArmorStands. `ArmorStandUtil` creates `ItemDisplay` entities.
 4. **Min players** – `min-players: 2` in `config.yml` (match starts when that many players have joined).
+5. **GenesiGamesApi** – soft/hard depend for shared games path convention.
 
 ## How to play
 

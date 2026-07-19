@@ -42,7 +42,9 @@ ONESHOT_CP="$CP:$ONESHOT_SRC"
 javac --release 21 -cp "$ONESHOT_CP" -d "$ROOT/build/classes" \
   "$ROOT/patches/com/qualityplus/oneshoot/base/config/Config.java" \
   "$ROOT/patches/com/qualityplus/oneshoot/base/config/Commands.java" \
-  "$ROOT/patches/com/qualityplus/oneshoot/base/service/OneShootServiceImpl.java"
+  "$ROOT/patches/com/qualityplus/oneshoot/base/service/OneShootServiceImpl.java" \
+  "$ROOT/patches/com/qualityplus/oneshoot/base/commands/provider/OneShootCommandProvider.java" \
+  "$ROOT/patches/com/qualityplus/oneshoot/OneShoot.java"
 
 # ---- Patch TheAssistant jar ----
 WORKDIR="$ROOT/build/assistant-work"
@@ -93,16 +95,22 @@ cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/config/Commands*.class
   "$WORKDIR/com/qualityplus/oneshoot/base/config/"
 cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/service/OneShootServiceImpl*.class \
   "$WORKDIR/com/qualityplus/oneshoot/base/service/"
+cp -f "$ROOT/build/classes/com/qualityplus/oneshoot/OneShoot.class" \
+  "$WORKDIR/com/qualityplus/oneshoot/"
+mkdir -p "$WORKDIR/com/qualityplus/oneshoot/base/commands/provider"
+cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/commands/provider/OneShootCommandProvider*.class \
+  "$WORKDIR/com/qualityplus/oneshoot/base/commands/provider/"
 
 cat > "$WORKDIR/plugin.yml" <<'EOF'
 name: OneShot
 description: OneShot — one-arrow duel minigame (Genesiverse)
 main: com.qualityplus.oneshoot.OneShoot
-version: 1.0.2
+version: 1.0.3
 api-version: '1.21'
 authors: [QualityPlus, Genesi]
 load: POSTWORLD
-depend: [TheAssistant]
+depend: [TheAssistant, GenesiGamesApi]
+softdepend: [GenesiCore]
 commands:
   oneshot:
     aliases: [os]
@@ -118,5 +126,8 @@ echo "Built $ROOT/dist/OneShot.jar ($(wc -c < "$ROOT/dist/OneShot.jar") bytes)"
 javap -c -classpath "$ROOT/dist/the-assistant-4.0.2.jar" com.qualityplus.assistant.hologram.TheHologram \
   | grep -q TextDisplay && echo "OK: TheHologram uses TextDisplay"
 javap -classpath "$ROOT/dist/OneShot.jar" -verbose 2>/dev/null | head -1
-unzip -p "$ROOT/dist/OneShot.jar" plugin.yml | head -5
+unzip -p "$ROOT/dist/OneShot.jar" plugin.yml | head -8
+javap -c -classpath "$ROOT/dist/OneShot.jar" \
+  com.qualityplus.oneshoot.base.commands.provider.OneShootCommandProvider \
+  | grep -q 'oneshot' && echo "OK: CommandProvider label is oneshot"
 echo "Done."
