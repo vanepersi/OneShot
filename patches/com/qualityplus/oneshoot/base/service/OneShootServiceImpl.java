@@ -136,11 +136,23 @@ public final class OneShootServiceImpl implements OneShootService {
    public void leaveGame(UUID player, OneShootGame game) {
       Location mainLobby = this.config.getMainSpawn().getLocation();
       Optional<OneShootPlayer> player1 = game.getPlayer(player);
-      player1.flatMap(OneShootPlayer::getBukkitPlayer).ifPresent(pl -> {
-         pl.teleport(mainLobby);
-         pl.getInventory().clear();
-      });
+      // Always try to clean up the online player even if document lookup fails
+      org.bukkit.entity.Player online = Bukkit.getPlayer(player);
+      if (online != null) {
+         online.getInventory().clear();
+         if (mainLobby != null && mainLobby.getWorld() != null) {
+            online.teleport(mainLobby);
+         }
+      } else {
+         player1.flatMap(OneShootPlayer::getBukkitPlayer).ifPresent(pl -> {
+            pl.teleport(mainLobby);
+            pl.getInventory().clear();
+         });
+      }
       player1.ifPresent(p -> game.getPlayers().remove(p));
+      if (player1.isEmpty()) {
+         game.getPlayers().removeIf(p -> p.getUuid() != null && p.getUuid().equals(player));
+      }
       game.getSpawnCache().remove(player);
       if (game.getStatus() == OneShootGameStatus.STARTING && game.getPlayers().size() < this.minPlayers()) {
          game.setStatus(OneShootGameStatus.WAITING);
@@ -149,7 +161,7 @@ public final class OneShootServiceImpl implements OneShootService {
       List<IPlaceholder> placeholders = List.of(
          new Placeholder("current_players", game.getPlayers().size()),
          new Placeholder("max_players", this.minPlayers()),
-         new Placeholder("player", player1.map(OneShootPlayer::getName).orElse(""))
+         new Placeholder("player", player1.map(OneShootPlayer::getName).orElse(online != null ? online.getName() : ""))
       );
       String message;
       if (game.getStatus().equals(OneShootGameStatus.IN_GAME)) {
@@ -196,7 +208,7 @@ public final class OneShootServiceImpl implements OneShootService {
          game.getSpawnCache().clear();
 
          for (Player p : players) {
-            if (player == null || p.getUniqueId() != player.getUuid()) {
+            if (player == null || !p.getUniqueId().equals(player.getUuid())) {
                p.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
             }
          }

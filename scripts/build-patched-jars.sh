@@ -49,6 +49,10 @@ javac --release 21 -cp "$ONESHOT_CP" -d "$ROOT/build/classes" \
   "$ROOT/patches/com/qualityplus/oneshoot/base/service/OneShootServiceImpl.java" \
   "$ROOT/patches/com/qualityplus/oneshoot/base/commands/provider/OneShootCommandProvider.java" \
   "$ROOT/patches/com/qualityplus/oneshoot/base/commands/game/InviteCommand.java" \
+  "$ROOT/patches/com/qualityplus/oneshoot/base/commands/game/LeaveCommand.java" \
+  "$ROOT/patches/com/qualityplus/oneshoot/api/domain/OneShootGame.java" \
+  "$ROOT/patches/com/qualityplus/oneshoot/listener/GameListener.java" \
+  "$ROOT/patches/com/qualityplus/oneshoot/base/handler/ArenaHandler.java" \
   "$ROOT/patches/com/qualityplus/oneshoot/OneShoot.java"
 
 # ---- Patch TheAssistant jar ----
@@ -108,12 +112,23 @@ cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/commands/provider/OneS
 mkdir -p "$WORKDIR/com/qualityplus/oneshoot/base/commands/game"
 cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/commands/game/InviteCommand*.class \
   "$WORKDIR/com/qualityplus/oneshoot/base/commands/game/"
+cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/commands/game/LeaveCommand*.class \
+  "$WORKDIR/com/qualityplus/oneshoot/base/commands/game/"
+mkdir -p "$WORKDIR/com/qualityplus/oneshoot/api/domain" \
+  "$WORKDIR/com/qualityplus/oneshoot/listener" \
+  "$WORKDIR/com/qualityplus/oneshoot/base/handler"
+cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/api/domain/OneShootGame*.class \
+  "$WORKDIR/com/qualityplus/oneshoot/api/domain/"
+cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/listener/GameListener*.class \
+  "$WORKDIR/com/qualityplus/oneshoot/listener/"
+cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/handler/ArenaHandler*.class \
+  "$WORKDIR/com/qualityplus/oneshoot/base/handler/"
 
 cat > "$WORKDIR/plugin.yml" <<'EOF'
 name: OneShot
 description: OneShot — one-arrow duel minigame (Genesiverse)
 main: com.qualityplus.oneshoot.OneShoot
-version: 1.0.4
+version: 1.0.5
 api-version: '1.21'
 authors: [QualityPlus, Genesi]
 load: POSTWORLD
