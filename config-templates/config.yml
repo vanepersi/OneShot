@@ -296,12 +296,12 @@ database-credentials:
 message-system: iToast
 lobby-item-config:
   leave-item:
-    material: null
+    material: RED_BED
     custom-model-data: 0
-    amount: 0
-    display-name: null
-    slot: 0
-    enabled: false
+    amount: 1
+    display-name: '&cLeave Game'
+    slot: 8
+    enabled: true
 main-spawn:
   x: 0.0
   y: 0.0
