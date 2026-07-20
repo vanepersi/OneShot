@@ -48,6 +48,34 @@ public final class OneShootServiceImpl implements OneShootService {
       return this.config.getMinPlayers();
    }
 
+   /**
+    * Give the lobby leave item only when it is enabled and has a valid material.
+    * Stock config ships with material: null / enabled: false, which previously NPE'd on join.
+    */
+   private void prepareLobbyInventory(Player player) {
+      player.getInventory().clear();
+      Config.LobbyItemConfig.LobbyItem lobbyItem = this.config.getLobbyItemConfig().leaveItem;
+      if (lobbyItem == null || !lobbyItem.isEnabled() || lobbyItem.getMaterial() == null) {
+         return;
+      }
+      ItemStack leaveButton = lobbyItem.getMaterial().parseItem();
+      if (leaveButton == null) {
+         return;
+      }
+      ItemMeta leaveButtonMeta = leaveButton.getItemMeta();
+      if (leaveButtonMeta != null) {
+         if (lobbyItem.getDisplayName() != null) {
+            leaveButtonMeta.setDisplayName(StringUtils.color(lobbyItem.getDisplayName()));
+         }
+         leaveButtonMeta.setCustomModelData(lobbyItem.getCustomModelData());
+         leaveButton.setItemMeta(leaveButtonMeta);
+      }
+      NBTItem leaveNBTItem = new NBTItem(leaveButton);
+      leaveNBTItem.setBoolean("UNO_LEAVE_NBT_KEY", true);
+      int slot = lobbyItem.getSlot() > 0 ? lobbyItem.getSlot() : 8;
+      player.getInventory().setItem(slot, leaveNBTItem.getItem());
+   }
+
    @Override
    public void joinGame(OneShootPlayer player) throws ArenaNotAvailableException, AlreadyInGameException {
       List<OneShootGame> availableArenas = this.getAvailableGames();
@@ -59,19 +87,7 @@ public final class OneShootServiceImpl implements OneShootService {
          if (gamePlayer.isPresent()) {
             throw new AlreadyInGameException();
          } else {
-            player.getBukkitPlayer().ifPresent(pl -> {
-               pl.getInventory().clear();
-               Config.LobbyItemConfig lobbyItemConfig = this.config.getLobbyItemConfig();
-               Config.LobbyItemConfig.LobbyItem lobbyItem = lobbyItemConfig.leaveItem;
-               ItemStack leaveButton = lobbyItem.getMaterial().parseItem();
-               ItemMeta leaveButtonMeta = leaveButton.getItemMeta();
-               leaveButtonMeta.setDisplayName(StringUtils.color(lobbyItem.getDisplayName()));
-               leaveButtonMeta.setCustomModelData(lobbyItem.getCustomModelData());
-               leaveButton.setItemMeta(leaveButtonMeta);
-               NBTItem leaveNBTItem = new NBTItem(leaveButton);
-               leaveNBTItem.setBoolean("UNO_LEAVE_NBT_KEY", true);
-               pl.getInventory().setItem(8, leaveNBTItem.getItem());
-            });
+            player.getBukkitPlayer().ifPresent(this::prepareLobbyInventory);
             game.getPlayers().add(player);
             if (game.getPlayers().size() == this.minPlayers()) {
                game.setCountdown(game.getArena().getArenaSettings().countdownSeconds);
@@ -97,19 +113,7 @@ public final class OneShootServiceImpl implements OneShootService {
       if (gamePlayer.isPresent()) {
          throw new AlreadyInGameException();
       } else {
-         player.getBukkitPlayer().ifPresent(pl -> {
-            pl.getInventory().clear();
-            Config.LobbyItemConfig lobbyItemConfig = this.config.getLobbyItemConfig();
-            Config.LobbyItemConfig.LobbyItem lobbyItem = lobbyItemConfig.leaveItem;
-            ItemStack leaveButton = lobbyItem.getMaterial().parseItem();
-            ItemMeta leaveButtonMeta = leaveButton.getItemMeta();
-            leaveButtonMeta.setDisplayName(StringUtils.color(lobbyItem.getDisplayName()));
-            leaveButtonMeta.setCustomModelData(lobbyItem.getCustomModelData());
-            leaveButton.setItemMeta(leaveButtonMeta);
-            NBTItem leaveNBTItem = new NBTItem(leaveButton);
-            leaveNBTItem.setBoolean("UNO_LEAVE_NBT_KEY", true);
-            pl.getInventory().setItem(8, leaveNBTItem.getItem());
-         });
+         player.getBukkitPlayer().ifPresent(this::prepareLobbyInventory);
          game.getPlayers().add(player);
          if (game.getPlayers().size() == this.minPlayers()) {
             game.setCountdown(game.getArena().getArenaSettings().countdownSeconds);

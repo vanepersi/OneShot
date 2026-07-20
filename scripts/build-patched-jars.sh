@@ -18,7 +18,11 @@ for f in "$ASSIST_SRC" "$ONESHOT_SRC" "$PAPER"; do
   [[ -f "$f" ]] || { echo "Missing $f"; exit 1; }
 done
 
-CP="$PAPER:$ASSIST_SRC:$ROOT/lib/guava.jar:$ROOT/lib/annotations.jar:$ROOT/lib/adventure-api.jar:$ROOT/lib/adventure-key.jar:$ROOT/lib/examination.jar:$ROOT/lib/commons-lang.jar:$ROOT/lib/bungeecord-chat.jar"
+if [[ ! -f "$ROOT/lib/adventure-text-serializer-legacy.jar" ]]; then
+  curl -fsSL -o "$ROOT/lib/adventure-text-serializer-legacy.jar" \
+    "https://repo1.maven.org/maven2/net/kyori/adventure-text-serializer-legacy/4.17.0/adventure-text-serializer-legacy-4.17.0.jar"
+fi
+CP="$PAPER:$ASSIST_SRC:$ROOT/lib/guava.jar:$ROOT/lib/annotations.jar:$ROOT/lib/adventure-api.jar:$ROOT/lib/adventure-key.jar:$ROOT/lib/adventure-text-serializer-legacy.jar:$ROOT/lib/examination.jar:$ROOT/lib/commons-lang.jar:$ROOT/lib/bungeecord-chat.jar"
 
 # JOML is needed for Transformation / ItemDisplay
 JOML_DIR="$ROOT/lib"
@@ -44,6 +48,7 @@ javac --release 21 -cp "$ONESHOT_CP" -d "$ROOT/build/classes" \
   "$ROOT/patches/com/qualityplus/oneshoot/base/config/Commands.java" \
   "$ROOT/patches/com/qualityplus/oneshoot/base/service/OneShootServiceImpl.java" \
   "$ROOT/patches/com/qualityplus/oneshoot/base/commands/provider/OneShootCommandProvider.java" \
+  "$ROOT/patches/com/qualityplus/oneshoot/base/commands/game/InviteCommand.java" \
   "$ROOT/patches/com/qualityplus/oneshoot/OneShoot.java"
 
 # ---- Patch TheAssistant jar ----
@@ -100,12 +105,15 @@ cp -f "$ROOT/build/classes/com/qualityplus/oneshoot/OneShoot.class" \
 mkdir -p "$WORKDIR/com/qualityplus/oneshoot/base/commands/provider"
 cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/commands/provider/OneShootCommandProvider*.class \
   "$WORKDIR/com/qualityplus/oneshoot/base/commands/provider/"
+mkdir -p "$WORKDIR/com/qualityplus/oneshoot/base/commands/game"
+cp -f "$ROOT/build/classes"/com/qualityplus/oneshoot/base/commands/game/InviteCommand*.class \
+  "$WORKDIR/com/qualityplus/oneshoot/base/commands/game/"
 
 cat > "$WORKDIR/plugin.yml" <<'EOF'
 name: OneShot
 description: OneShot — one-arrow duel minigame (Genesiverse)
 main: com.qualityplus.oneshoot.OneShoot
-version: 1.0.3
+version: 1.0.4
 api-version: '1.21'
 authors: [QualityPlus, Genesi]
 load: POSTWORLD
